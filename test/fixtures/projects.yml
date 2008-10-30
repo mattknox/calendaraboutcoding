@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  streak: 1
+  max_streak: 1
+
+two:
+  name: MyString
+  streak: 1
+  max_streak: 1

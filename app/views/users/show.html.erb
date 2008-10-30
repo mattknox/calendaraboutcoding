@@ -1,0 +1,31 @@
+<%=
+  calendar({:year => 2008, :month => 10}) do |d|
+    cell_text = "#{d.mday}<br />" 
+    cell_attrs = {:class => 'day'}
+    [].each do |e|
+      if e.starts_at.mday == d.mday
+        cell_text << link_to( e.title, :action => 'show', :id => e ) << "<br />" 
+        cell_attrs[:class] = 'specialDay'
+      end
+    end
+    [cell_text, cell_attrs]
+  end
+  %>
+<p>
+  <b>Name:</b>
+  <%=h @user.name %>
+</p>
+
+<p>
+  <b>Streak:</b>
+  <%=h @user.streak %>
+</p>
+
+<p>
+  <b>Max streak:</b>
+  <%=h @user.max_streak %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

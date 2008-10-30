@@ -1,0 +1,28 @@
+<p>
+  <b>User:</b>
+  <%=h @checkin.user %>
+</p>
+
+<p>
+  <b>Project:</b>
+  <%=h @checkin.project %>
+</p>
+
+<p>
+  <b>Commit time:</b>
+  <%=h @checkin.commit_time %>
+</p>
+
+<p>
+  <b>Comment:</b>
+  <%=h @checkin.comment %>
+</p>
+
+<p>
+  <b>Hash:</b>
+  <%=h @checkin.hash %>
+</p>
+
+
+<%= link_to 'Edit', edit_checkin_path(@checkin) %> |
+<%= link_to 'Back', checkins_path %>

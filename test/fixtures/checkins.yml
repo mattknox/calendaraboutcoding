@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user: 
+  project: 
+  commit_time: 2008-10-29 22:02:25
+  comment: MyString
+  hash: MyString
+
+two:
+  user: 
+  project: 
+  commit_time: 2008-10-29 22:02:25
+  comment: MyString
+  hash: MyString

@@ -1,0 +1,31 @@
+<h1>New checkin</h1>
+
+<% form_for(@checkin) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :user %><br />
+    <%= f.text_field :user %>
+  </p>
+  <p>
+    <%= f.label :project %><br />
+    <%= f.text_field :project %>
+  </p>
+  <p>
+    <%= f.label :commit_time %><br />
+    <%= f.datetime_select :commit_time %>
+  </p>
+  <p>
+    <%= f.label :comment %><br />
+    <%= f.text_field :comment %>
+  </p>
+  <p>
+    <%= f.label :hash %><br />
+    <%= f.text_field :hash %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', checkins_path %>

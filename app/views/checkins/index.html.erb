@@ -1,0 +1,28 @@
+<h1>Listing checkins</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Project</th>
+    <th>Commit time</th>
+    <th>Comment</th>
+    <th>Hash</th>
+  </tr>
+
+<% for checkin in @checkins %>
+  <tr>
+    <td><%=h checkin.user %></td>
+    <td><%=h checkin.project %></td>
+    <td><%=h checkin.commit_time %></td>
+    <td><%=h checkin.comment %></td>
+    <td><%=h checkin.hash %></td>
+    <td><%= link_to 'Show', checkin %></td>
+    <td><%= link_to 'Edit', edit_checkin_path(checkin) %></td>
+    <td><%= link_to 'Destroy', checkin, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New checkin', new_checkin_path %>
