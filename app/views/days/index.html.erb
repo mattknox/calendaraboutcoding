@@ -1,0 +1,24 @@
+<h1>Listing days</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Date</th>
+    <th>Commit count</th>
+  </tr>
+
+<% for day in @days %>
+  <tr>
+    <td><%=h day.user_id %></td>
+    <td><%=h day.date %></td>
+    <td><%=h day.commit_count %></td>
+    <td><%= link_to 'Show', day %></td>
+    <td><%= link_to 'Edit', edit_day_path(day) %></td>
+    <td><%= link_to 'Destroy', day, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New day', new_day_path %>

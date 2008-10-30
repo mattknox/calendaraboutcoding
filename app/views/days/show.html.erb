@@ -1,0 +1,18 @@
+<p>
+  <b>User:</b>
+  <%=h @day.user_id %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%=h @day.date %>
+</p>
+
+<p>
+  <b>Commit count:</b>
+  <%=h @day.commit_count %>
+</p>
+
+
+<%= link_to 'Edit', edit_day_path(@day) %> |
+<%= link_to 'Back', days_path %>

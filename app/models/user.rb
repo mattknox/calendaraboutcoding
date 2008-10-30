@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
-
+  has_many :projects
+  has_many :checkins
+  has_many :days
+  
   def seinfeld
     now        = Date.new(params[:year], params[:month])
     prev_month = now << 1

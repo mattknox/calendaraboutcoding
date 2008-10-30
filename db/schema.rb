@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081030020225) do
+ActiveRecord::Schema.define(:version => 20081030024249) do
 
   create_table "checkins", :force => true do |t|
     t.integer  "user_id",     :limit => 11
@@ -17,6 +17,14 @@ ActiveRecord::Schema.define(:version => 20081030020225) do
     t.datetime "commit_time"
     t.string   "comment"
     t.string   "hash"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "days", :force => true do |t|
+    t.integer  "user_id",      :limit => 11
+    t.date     "date"
+    t.integer  "commit_count", :limit => 11
     t.datetime "created_at"
     t.datetime "updated_at"
   end
