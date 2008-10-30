@@ -4,6 +4,7 @@ class CreateDays < ActiveRecord::Migration
       t.integer :user_id
       t.date :date
       t.integer :commit_count
+      t.integer :current_streak
 
       t.timestamps
     end

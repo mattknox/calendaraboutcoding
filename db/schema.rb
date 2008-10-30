@@ -22,9 +22,10 @@ ActiveRecord::Schema.define(:version => 20081030024249) do
   end
 
   create_table "days", :force => true do |t|
-    t.integer  "user_id",      :limit => 11
+    t.integer  "user_id",        :limit => 11
     t.date     "date"
-    t.integer  "commit_count", :limit => 11
+    t.integer  "commit_count",   :limit => 11
+    t.integer  "current_streak", :limit => 11
     t.datetime "created_at"
     t.datetime "updated_at"
   end
