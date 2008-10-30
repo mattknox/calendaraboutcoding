@@ -1,16 +1,21 @@
-<%=
-  calendar({:year => 2008, :month => 10}) do |d|
-    cell_text = "#{d.mday}<br />" 
-    cell_attrs = {:class => 'day'}
-    [].each do |e|
-      if e.starts_at.mday == d.mday
-        cell_text << link_to( e.title, :action => 'show', :id => e ) << "<br />" 
-        cell_attrs[:class] = 'specialDay'
+<div id="calendar">
+  <%= 
+now        = Date.new(2008, 10 )
+    prev_month = now << 1
+    next_month = now >> 1
+    @cal = calendar :year => now.year, :month => now.month,
+    :previous_month_text => %(<a href="/~#{@user.name}/#{prev_month.year}/#{prev_month.month}">Previous Month</a>), 
+    :next_month_text     => %(<a href="/~#{@user.name}/#{next_month.year}/#{next_month.month}" class="next">Next Month</a>) do |d|
+      logger.info d.inspect
+      if @user.on_days.include? d
+        [d.mday.to_s + "<div class='xmarksthespot x-1'/>", {:class => "progressed"}]
+      else
+        [d.mday, {:class => "slacked"}]
       end
     end
-    [cell_text, cell_attrs]
-  end
-  %>
+  @cal
+-%>
+</div>
 <p>
   <b>Name:</b>
   <%=h @user.name %>
