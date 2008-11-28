@@ -14,3 +14,10 @@ class User < ActiveRecord::Base
     self.days.map { |d| d.date }
   end
 end
+
+# this is sufficient to grab the feed from github for a user.  
+# require "net/http"
+# require "lib/feed_me/lib/feed_me"
+
+# s = Net::HTTP.get URI.parse('http://github.com/mattknox.atom')
+# FeedMe.parse(s)
