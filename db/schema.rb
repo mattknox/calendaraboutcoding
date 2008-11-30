@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(:version => 20081030024249) do
     t.datetime "commit_time"
     t.string   "comment"
     t.string   "hash"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -40,8 +41,8 @@ ActiveRecord::Schema.define(:version => 20081030024249) do
 
   create_table "users", :force => true do |t|
     t.string   "name"
-    t.integer  "streak",     :limit => 11
-    t.integer  "max_streak", :limit => 11
+    t.string   "github_login"
+    t.datetime "github_current_to"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

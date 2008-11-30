@@ -6,6 +6,8 @@ class CreateCheckins < ActiveRecord::Migration
       t.datetime :commit_time
       t.string :comment
       t.string :hash
+      t.text :content
+      t.string 
 
       t.timestamps
     end

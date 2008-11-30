@@ -7,18 +7,15 @@ class User < ActiveRecord::Base
   has_many :checkins
   has_many :days
 
-  after_create :pull_all_history
+  after_create :pull_history
 
   def pull_history
     # here, we should pull all of history, back as far as one's most recent commits
+    
   end
   
   def on_days
     self.days.map { |d| d.date }
-  end
-
-  def github_login
-    "mattknox"
   end
 
   # tore this out of CAN, should rework it, so that it grabs as far back as it needs to to get all your history
@@ -58,7 +55,6 @@ class User < ActiveRecord::Base
     days
   end
 
-  private
   def get_feed(page = 1)
     s = Net::HTTP.get URI.parse("http://github.com/#{github_login}.atom?page=#{page}")
     FeedMe.parse(s)
