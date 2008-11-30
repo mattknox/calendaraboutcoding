@@ -21,13 +21,6 @@ class User < ActiveRecord::Base
     "mattknox"
   end
 
-  # this is sufficient to grab the feed from github for a user.  
-  # require "net/http"
-  # require "lib/feed_me/lib/feed_me"
-  
-  # s = Net::HTTP.get URI.parse('http://github.com/mattknox.atom')
-  # FeedMe.parse(s)
-  
   # tore this out of CAN, should rework it, so that it grabs as far back as it needs to to get all your history
   # or all your history back to the last pull
   def committed_days_in_feed(page = 1)
