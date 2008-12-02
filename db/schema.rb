@@ -16,7 +16,9 @@ ActiveRecord::Schema.define(:version => 20081030024249) do
     t.integer  "project_id",  :limit => 11
     t.datetime "commit_time"
     t.string   "comment"
-    t.string   "hash"
+    t.string   "hashcode"
+    t.string   "title"
+    t.string   "url"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"

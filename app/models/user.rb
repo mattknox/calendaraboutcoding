@@ -10,8 +10,30 @@ class User < ActiveRecord::Base
   after_create :pull_history
 
   def pull_history
-    # here, we should pull all of history, back as far as one's most recent commits
-    
+    # here, we should pull all of history, back to the most recent processed commit.
+    unprocessed_checkins = []
+    page = 1
+    while 1 # go back until we get to github_current_to, or run out of history
+      f = get_feed(page)
+      break unless f
+      page += 1 # 0  #FIXME:  make this increment by one when I'm done testing it.
+      f.entries.reject { |x| self.too_early?(x.updated_at) }.each do |e|
+        url = e.url
+        unprocessed_checkins <<  Checkin.new(:commit_time => e.updated_at,
+                                             :content => e.content,
+                                             :url => url,
+                                             :hashcode => url.split("/").last,
+                                             :title => e.title,
+                                             :user_id => self.id)
+      end
+    end
+    # process all these unprocessed checkins
+    unprocessed_checkins
+    # set the github_current_to
+  end
+
+  def too_early?(time)
+    self.github_current_to and (time <= self.github_current_to)
   end
   
   def on_days

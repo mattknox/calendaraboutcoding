@@ -5,7 +5,9 @@ class CreateCheckins < ActiveRecord::Migration
       t.references :project
       t.datetime :commit_time
       t.string :comment
-      t.string :hash
+      t.string :hashcode
+      t.string :title
+      t.string :url
       t.text :content
       t.string 
 
