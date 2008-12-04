@@ -14,8 +14,10 @@ class User < ActiveRecord::Base
     unprocessed_checkins = []
     page = 1
     while 1 # go back until we get to github_current_to, or run out of history
-      f = get_feed(page)
+      f = get_feed(page) 
+      puts page
       break unless f
+      break if f.entries.blank?
       page += 1 # 0  #FIXME:  make this increment by one when I'm done testing it.
       f.entries.reject { |x| self.too_early?(x.updated_at) }.each do |e|
         url = e.url
