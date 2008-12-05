@@ -9,6 +9,14 @@ class User < ActiveRecord::Base
 
   after_create :pull_history
 
+  def streak
+    Day.find(:first, :conditions => ["user_id = ? and date > ?", self.id, Date.today - 2.days ], :order => "date desc").current_streak rescue 0
+  end
+
+  def max_streak
+    Day.maximum(:current_streak, :conditions => ["user_id = ?", self.id])
+  end
+  
   def pull_history
     # here, we should pull all of history, back to the most recent processed commit.
     unprocessed_checkins = []
