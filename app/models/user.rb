@@ -7,7 +7,12 @@ class User < ActiveRecord::Base
   has_many :checkins
   has_many :days
 
+  before_create :set_github_login!
   after_create :pull_history
+
+  def set_github_login!
+    self.github_login = self.name
+  end
 
   def streak
     Day.find(:first, :conditions => ["user_id = ? and date > ?", self.id, Date.today - 2.days ], :order => "date desc").current_streak rescue 0
@@ -31,7 +36,7 @@ class User < ActiveRecord::Base
         url = e.url
         title = e.title
         content = e.content
-        commit_time = e.updated_at
+        commit_time = e.updated_at.utc
         earliest_time = commit_time
         break if self.too_early?(earliest_time)
         if title.match(/committed to/) and !self.too_early?(commit_time)

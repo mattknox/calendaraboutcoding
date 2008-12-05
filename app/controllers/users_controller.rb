@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   # GET /users/1.xml
   def show
     @user = User.find(params[:id])
+    @user.pull_history
 
     respond_to do |format|
       format.html # show.html.erb

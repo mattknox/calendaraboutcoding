@@ -12,8 +12,8 @@
 ActiveRecord::Schema.define(:version => 20081030024249) do
 
   create_table "checkins", :force => true do |t|
-    t.integer  "user_id",     :limit => 11
-    t.integer  "project_id",  :limit => 11
+    t.integer  "user_id"
+    t.integer  "project_id"
     t.datetime "commit_time"
     t.string   "comment"
     t.string   "hashcode"
@@ -25,18 +25,18 @@ ActiveRecord::Schema.define(:version => 20081030024249) do
   end
 
   create_table "days", :force => true do |t|
-    t.integer  "user_id",        :limit => 11
+    t.integer  "user_id"
     t.date     "date"
-    t.integer  "commit_count",   :limit => 11
-    t.integer  "current_streak", :limit => 11
+    t.integer  "commit_count"
+    t.integer  "current_streak"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "projects", :force => true do |t|
     t.string   "name"
-    t.integer  "streak",     :limit => 11
-    t.integer  "max_streak", :limit => 11
+    t.integer  "streak"
+    t.integer  "max_streak"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
