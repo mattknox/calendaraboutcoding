@@ -15,23 +15,34 @@ class User < ActiveRecord::Base
     page = 1
     while 1 # go back until we get to github_current_to, or run out of history
       f = get_feed(page) 
-      puts page
       break unless f
-      break if f.entries.blank?
-      page += 1 # 0  #FIXME:  make this increment by one when I'm done testing it.
-      f.entries.reject { |x| self.too_early?(x.updated_at) }.each do |e|
+      break if f.entries.blank? 
+      page += 1
+      earliest_time = Time.now
+      f.entries.each do |e|
         url = e.url
-        unprocessed_checkins <<  Checkin.new(:commit_time => e.updated_at,
-                                             :content => e.content,
-                                             :url => url,
-                                             :hashcode => url.split("/").last,
-                                             :title => e.title,
-                                             :user_id => self.id)
+        title = e.title
+        content = e.content
+        commit_time = e.updated_at
+        earliest_time = commit_time
+        break if self.too_early?(earliest_time)
+        if title.match(/committed to/) and !self.too_early?(commit_time)
+          unprocessed_checkins <<  Checkin.new(:commit_time => commit_time,
+                                               :content => content,
+                                               :url => url,
+                                               :hashcode => url.split("/").last,
+                                               :title => title,
+                                               :user_id => self.id)
+        end
       end
+      break if self.too_early?(earliest_time)
     end
     # process all these unprocessed checkins
-    unprocessed_checkins
-    # set the github_current_to
+    unprocessed_checkins.sort { |x, y| x.commit_time <=> y.commit_time }.each do |u|
+      u.save
+      self.github_current_to = u.commit_time
+    end
+    self.save
   end
 
   def too_early?(time)
