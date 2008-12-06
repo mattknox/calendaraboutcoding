@@ -7,6 +7,12 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :users
 
+  map.connect "users/:id/:year/:month", 
+  :controller => "users", 
+  :action => "show", 
+  :requirements => { :year => /(19|20)\d\d/, 
+    :month => /[01]?\d/},
+  :month => nil
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
