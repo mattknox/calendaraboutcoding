@@ -14,6 +14,8 @@ class UsersController < ApplicationController
   # GET /users/1.xml
   def show
     @user = User.find(params[:id])
+    @year = (params[:year] ||  Time.now.utc.year).to_i
+    @month = (params[:month] ||  Time.now.utc.month).to_i
     @user.pull_history
 
     respond_to do |format|
