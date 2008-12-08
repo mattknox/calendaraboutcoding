@@ -1,0 +1,2 @@
+module FeedSpecsHelper
+end

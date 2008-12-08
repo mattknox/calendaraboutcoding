@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :feed_specs
+
   map.resources :days
 
   map.resources :checkins

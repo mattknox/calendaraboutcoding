@@ -4,6 +4,7 @@ class CreateProjects < ActiveRecord::Migration
       t.string :name
       t.integer :streak
       t.integer :max_streak
+      t.references :user
 
       t.timestamps
     end

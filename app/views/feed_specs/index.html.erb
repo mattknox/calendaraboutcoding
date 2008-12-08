@@ -1,0 +1,26 @@
+<h1>Listing feed_specs</h1>
+
+<table>
+  <tr>
+    <th>Uri</th>
+    <th>Regex</th>
+    <th>Time field name</th>
+    <th>Description</th>
+  </tr>
+
+<% for feed_spec in @feed_specs %>
+  <tr>
+    <td><%=h feed_spec.uri %></td>
+    <td><%=h feed_spec.regex %></td>
+    <td><%=h feed_spec.time_field_name %></td>
+    <td><%=h feed_spec.description %></td>
+    <td><%= link_to 'Show', feed_spec %></td>
+    <td><%= link_to 'Edit', edit_feed_spec_path(feed_spec) %></td>
+    <td><%= link_to 'Destroy', feed_spec, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New feed_spec', new_feed_spec_path %>

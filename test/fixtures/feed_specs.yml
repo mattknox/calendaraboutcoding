@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  uri: MyString
+  regex: MyString
+  time_field_name: MyString
+  description: MyText
+
+two:
+  uri: MyString
+  regex: MyString
+  time_field_name: MyString
+  description: MyText

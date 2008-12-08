@@ -1,0 +1,23 @@
+<p>
+  <b>Uri:</b>
+  <%=h @feed_spec.uri %>
+</p>
+
+<p>
+  <b>Regex:</b>
+  <%=h @feed_spec.regex %>
+</p>
+
+<p>
+  <b>Time field name:</b>
+  <%=h @feed_spec.time_field_name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @feed_spec.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_feed_spec_path(@feed_spec) %> |
+<%= link_to 'Back', feed_specs_path %>
