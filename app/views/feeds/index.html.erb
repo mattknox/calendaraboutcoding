@@ -1,0 +1,26 @@
+<h1>Listing feeds</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Feed spec</th>
+    <th>Login</th>
+    <th>Password</th>
+  </tr>
+
+<% for feed in @feeds %>
+  <tr>
+    <td><%=h feed.user_id %></td>
+    <td><%=h feed.feed_spec_id %></td>
+    <td><%=h feed.login %></td>
+    <td><%=h feed.password %></td>
+    <td><%= link_to 'Show', feed %></td>
+    <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
+    <td><%= link_to 'Destroy', feed, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New feed', new_feed_path %>

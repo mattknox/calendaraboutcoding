@@ -1,0 +1,23 @@
+<p>
+  <b>User:</b>
+  <%=h @feed.user_id %>
+</p>
+
+<p>
+  <b>Feed spec:</b>
+  <%=h @feed.feed_spec_id %>
+</p>
+
+<p>
+  <b>Login:</b>
+  <%=h @feed.login %>
+</p>
+
+<p>
+  <b>Password:</b>
+  <%=h @feed.password %>
+</p>
+
+
+<%= link_to 'Edit', edit_feed_path(@feed) %> |
+<%= link_to 'Back', feeds_path %>

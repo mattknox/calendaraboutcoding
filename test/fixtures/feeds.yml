@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user_id: 1
+  feed_spec_id: 1
+  login: MyString
+  password: MyString
+
+two:
+  user_id: 1
+  feed_spec_id: 1
+  login: MyString
+  password: MyString
