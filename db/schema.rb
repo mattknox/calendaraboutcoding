@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081030024249) do
+ActiveRecord::Schema.define(:version => 20081209064535) do
 
   create_table "checkins", :force => true do |t|
     t.integer  "user_id",     :limit => 11
@@ -29,6 +29,24 @@ ActiveRecord::Schema.define(:version => 20081030024249) do
     t.date     "date"
     t.integer  "commit_count",   :limit => 11
     t.integer  "current_streak", :limit => 11
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "feed_specs", :force => true do |t|
+    t.string   "uri"
+    t.string   "regex"
+    t.string   "time_field_name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "feeds", :force => true do |t|
+    t.integer  "user_id",      :limit => 11
+    t.integer  "feed_spec_id", :limit => 11
+    t.string   "login"
+    t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
