@@ -7,7 +7,7 @@
     <th>Max streak</th>
   </tr>
 
-<% for user in @users %>
+<% for user in User.top_users %>
   <tr>
     <td><%=h user.name %></td>
     <td><%=h user.streak %></td>

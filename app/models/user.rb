@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
   before_create :set_github_login!
   after_create :pull_history
 
+  def self.top_users
+    User.find(:all)
+  end
+  
   def set_github_login!
     self.github_login = self.name
   end
