@@ -3,13 +3,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :feed_specs
 
-  map.resources :days
-
-  map.resources :checkins
-
-  map.resources :projects
-
-  map.resources :users
+  map.resources :users do |user|
+    user.resources :projects
+    user.resources :checkins
+  end
 
   map.connect "users/:id/:year/:month", 
   :controller => "users", 
