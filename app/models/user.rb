@@ -73,6 +73,10 @@ class User < ActiveRecord::Base
     self.days.map { |d| d.date }
   end
 
+  def did_today?
+    self.on_days.include?(Date.today)
+  end
+  
   def get_feed(page = 1)
     s = Net::HTTP.get URI.parse("http://github.com/#{github_login}.atom?page=#{page}")
     FeedMe.parse(s)
