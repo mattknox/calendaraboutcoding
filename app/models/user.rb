@@ -74,7 +74,7 @@ class User < ActiveRecord::Base
   end
 
   def did_today?
-    self.on_days.include?(Date.today)
+    self.on_days.include?(Time.now.utc.to_date)
   end
   
   def get_feed(page = 1)
