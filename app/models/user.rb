@@ -63,6 +63,7 @@ class User < ActiveRecord::Base
       self.github_current_to = u.commit_time
     end
     self.save
+    self.reload
   end
 
   def too_early?(time)
