@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   # GET /users.xml
   def index
     @users = User.find(:all)
-    @users.map { |u| u.pull_history unless u.did_today? }
+    @users.map { |u| u.pull_history unless u.pushed_today? }
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @year = (params[:year] ||  Time.now.utc.year).to_i
     @month = (params[:month] ||  Time.now.utc.month).to_i
-    @user.pull_history unless @user.did_today? 
+    @user.pull_history unless @user.pushed_today? 
 
     respond_to do |format|
       format.html # show.html.erb

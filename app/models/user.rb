@@ -74,7 +74,7 @@ class User < ActiveRecord::Base
     self.days.map { |d| d.date }
   end
 
-  def did_today?
+  def pushed_today?
     self.on_days.include?(Time.now.utc.to_date)
   end
   
