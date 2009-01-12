@@ -8,7 +8,9 @@ class User < ActiveRecord::Base
   has_many :days
 
   before_create :set_github_login!
-  after_create :pull_history
+  def after_create
+    pull_history
+  end
 
   def self.top_users
     User.find(:all)
@@ -26,10 +28,11 @@ class User < ActiveRecord::Base
     Day.maximum(:current_streak, :conditions => ["user_id = ?", self.id])
   end
   
-  def pull_history
+  def pull_history(page = 1)
     # here, we should pull all of history, back to the most recent processed commit.
+    # TODO:  make this handle people who have a lot of history and have never pulled.
+    # maybe this should just discard stuff until it got back to the first/first unpulled checkin?
     unprocessed_checkins = []
-    page = 1
     while 1 # go back until we get to github_current_to, or run out of history
       f = get_feed(page) 
       break unless f
@@ -44,15 +47,17 @@ class User < ActiveRecord::Base
         earliest_time = commit_time
         break if self.too_early?(earliest_time)
         if title.match(/committed to/) and !self.too_early?(commit_time)
-          project_name = title.match(/[^\s]+ committed to [^\s]+\/([^\s]+)/)[1]
-          project = Project.find_or_create_by_name_and_user_id(project_name, self.id)
-          unprocessed_checkins <<  Checkin.new(:commit_time => commit_time,
-                                               :content => content,
-                                               :url => url,
-                                               :project => project,
-                                               :hashcode => url.split("/").last,
-                                               :title => title,
-                                               :user_id => self.id)
+          project_name = title.match(/[^\s]+ committed to [^\s]+\/([^\s]+)/)[1] rescue nil
+          if project_name
+            project = Project.find_or_create_by_name_and_user_id(project_name, self.id)
+            unprocessed_checkins <<  Checkin.new(:commit_time => commit_time,
+                                                 :content => content,
+                                                 :url => url,
+                                                 :project => project,
+                                                 :hashcode => url.split("/").last,
+                                                 :title => title,
+                                                 :user_id => self.id)
+          end
         end
       end
       break if self.too_early?(earliest_time)
