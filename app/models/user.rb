@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :days
 
   before_create :set_github_login!
+
   def after_create
     pull_history
   end
@@ -81,6 +82,10 @@ class User < ActiveRecord::Base
 
   def pushed_today?
     self.on_days.include?(Time.now.utc.to_date)
+  end
+
+  def commits_today
+    self.checkins.count(:conditions => ["commit_time > ?", Time.now.utc.to_date])
   end
   
   def get_feed(page = 1)
