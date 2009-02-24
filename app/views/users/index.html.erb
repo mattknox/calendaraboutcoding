@@ -6,6 +6,7 @@
     <th>Streak</th>
     <th>Max streak</th>
     <th>commits today</th>
+    <th>commits yesterday</th>
   </tr>
 
 <% for user in User.top_users %>
@@ -14,6 +15,7 @@
     <td><%=h user.streak %></td>
     <td><%=h user.max_streak %></td>
     <td><%=h user.commits_today %></td>
+    <td><%=h user.commits_yesterday %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>

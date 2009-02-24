@@ -88,6 +88,10 @@ class User < ActiveRecord::Base
     self.checkins.count(:conditions => ["commit_time > ?", Time.now.utc.to_date])
   end
   
+  def commits_yesterday
+    self.checkins.count(:conditions => ["commit_time > ?", (Time.now - 1.day).utc.to_date])
+  end
+  
   def get_feed(page = 1)
     s = Net::HTTP.get URI.parse("http://github.com/#{github_login}.atom?page=#{page}")
     FeedMe.parse(s)
