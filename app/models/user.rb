@@ -89,7 +89,7 @@ class User < ActiveRecord::Base
   end
   
   def commits_yesterday
-    self.checkins.count(:conditions => ["commit_time > ?", (Time.now - 1.day).utc.to_date])
+    self.checkins.count(:conditions => ["commit_time > ? and commit_time < ?", (Time.now - 1.day).utc.to_date, Time.now.utc.to_date])
   end
   
   def get_feed(page = 1)
