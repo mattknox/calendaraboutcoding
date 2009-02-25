@@ -81,15 +81,17 @@ class User < ActiveRecord::Base
   end
 
   def pushed_today?
-    self.on_days.include?(Time.now.utc.to_date)
+    self.days.count(:conditions => ["`date` = ? ", Date.today]) == 1
   end
 
   def commits_today
-    self.checkins.count(:conditions => ["commit_time > ?", Time.now.utc.to_date])
+    day = self.days.find(:first, :conditions => ["`date` = ? ", Date.today])
+    day && day.commit_count
   end
   
   def commits_yesterday
-    self.checkins.count(:conditions => ["commit_time > ? and commit_time < ?", (Time.now - 1.day).utc.to_date, Time.now.utc.to_date])
+    day = self.days.find(:first, :conditions => ["`date` = ? ", Date.yesterday])
+    day && day.commit_count
   end
   
   def get_feed(page = 1)
