@@ -6,7 +6,7 @@ now        = Date.new(@year, @month )
     @cal = calendar :year => now.year, :month => now.month,
     :previous_month_text => %(<a href="/users/#{@user.id}/#{prev_month.year}/#{prev_month.month}">Previous Month</a>), 
     :next_month_text     => %(<a href="/users/#{@user.id}/#{next_month.year}/#{next_month.month}" class="next">Next Month</a>) do |d|
-      if @user.on_days.include? d
+      if @user.on_days(365).include? d
         [d.mday.to_s + "<div class='xmarksthespot x-1'/>", {:class => "progressed"}]
       else
         [d.mday, {:class => "slacked"}]

@@ -81,16 +81,16 @@ class User < ActiveRecord::Base
   end
 
   def pushed_today?
-    self.days.count(:conditions => ["`date` = ? ", Date.today]) == 1
+    self.days.count(:conditions => ["`date` = ? ", Time.now.utc.to_date]) == 1
   end
 
   def commits_today
-    day = self.days.find(:first, :conditions => ["`date` = ? ", Date.today])
+    day = self.days.find(:first, :conditions => ["`date` = ? ", Time.now.utc.to_date])
     day && day.commit_count
   end
   
   def commits_yesterday
-    day = self.days.find(:first, :conditions => ["`date` = ? ", Date.yesterday])
+    day = self.days.find(:first, :conditions => ["`date` = ? ", 24.hours.ago.utc.to_date])
     day && day.commit_count
   end
   
