@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
     # here, we should pull all of history, back to the most recent processed commit.
     # TODO:  make this handle people who have a lot of history and have never pulled.
     # maybe this should just discard stuff until it got back to the first/first unpulled checkin?
+    # FIXME:  dustin breaks on this function for some reason.
     unprocessed_checkins = []
     while 1 # go back until we get to github_current_to, or run out of history
       f = get_feed(page) 
