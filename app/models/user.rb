@@ -35,31 +35,30 @@ class User < ActiveRecord::Base
     # maybe this should just discard stuff until it got back to the first/first unpulled checkin?
     # FIXME:  dustin breaks on this function for some reason.
     unprocessed_checkins = []
-    while 1 # go back until we get to github_current_to, or run out of history
-      f = get_feed(page) 
-      break unless f
-      break if f.entries.blank? 
-      page += 1
-      earliest_time = Time.now
-      f.entries.each do |e|
-        url = e.url
-        title = e.title
-        content = e.content
-        commit_time = e.updated_at.utc
-        earliest_time = commit_time
-        break if self.too_early?(earliest_time)
-        if title.match(/committed to/) and !self.too_early?(commit_time)
-          project_name = title.match(/[^\s]+ committed to [^\s]+\/([^\s]+)/)[1] rescue nil
-          if project_name
-            project = Project.find_or_create_by_name_and_user_id(project_name, self.id)
-            unprocessed_checkins <<  Checkin.new(:commit_time => commit_time,
-                                                 :content => content,
-                                                 :url => url,
-                                                 :project => project,
-                                                 :hashcode => url.split("/").last,
-                                                 :title => title,
-                                                 :user_id => self.id)
-          end
+#    while 1 # go back until we get to github_current_to, or run out of history
+    f = get_feed(page) 
+    break unless f
+    break if f.entries.blank? 
+    page += 1
+    earliest_time = Time.now
+    f.entries.each do |e|
+      url = e.url
+      title = e.title
+      content = e.content
+      commit_time = e.updated_at.utc
+      earliest_time = commit_time
+      break if self.too_early?(earliest_time)
+      if (title.match(/committed to/) or title.match(/pushed to/)) and !self.too_early?(commit_time)
+        project_name = title.match(/[^\s]+ (committed|pushed) to [^\s]+ at [^\s]+\/([^\s]+)/)[2] rescue nil
+        if project_name
+          project = Project.find_or_create_by_name_and_user_id(project_name, self.id)
+          unprocessed_checkins <<  Checkin.new(:commit_time => commit_time,
+                                               :content => content,
+                                               :url => url,
+                                               :project => project,
+                                               :hashcode => url.split("/").last,
+                                               :title => title,
+                                               :user_id => self.id)
         end
       end
       break if self.too_early?(earliest_time)
