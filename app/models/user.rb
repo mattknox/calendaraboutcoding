@@ -37,8 +37,8 @@ class User < ActiveRecord::Base
     unprocessed_checkins = []
 #    while 1 # go back until we get to github_current_to, or run out of history
     f = get_feed(page) 
-    break unless f
-    break if f.entries.blank? 
+    return unless f
+    return if f.entries.blank? 
     page += 1
     earliest_time = Time.now
     f.entries.each do |e|
