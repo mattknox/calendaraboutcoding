@@ -75,7 +75,7 @@ class User < ActiveRecord::Base
   end
   
   def on_days(time_period = 60, start_days_ago = 0)
-    self.days.find(:all, :conditions => ["`date` > ? and `date` <= ? ", Date.today - (time_period + start_days_ago).days, Date.today - start_days_ago.days ]).map { |d| d.date }
+    self.days.find(:all, :conditions => ["`date` > ? and `date` <= ? ", Date.today - (time_period + start_days_ago).days, Time.now.utc.to_date - start_days_ago.days ]).map { |d| d.date }
   end
 
   def pushed_today?
