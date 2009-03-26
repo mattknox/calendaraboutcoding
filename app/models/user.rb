@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
     # here, we should pull all of history, back to the most recent processed commit.
     # TODO:  make this handle people who have a lot of history and have never pulled.
     # maybe this should just discard stuff until it got back to the first/first unpulled checkin?
+    # gah.  FeedMe is breaking again.  Need to make something better.
     unprocessed_checkins = []
     f = get_feed(page) 
     return unless f
