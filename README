@@ -1,4 +1,6 @@
 This application will become a web-tamagotchi-you'll pipe rss feeds into it and it'll track goals and represent your status in various ways.  
+I should think about how pluggable I can make this:  probably I can do the avatar generation in javascript/canvas.
+
 
 == Welcome to Rails
 
